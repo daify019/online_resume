@@ -8,3 +8,5 @@ verify-*
 .env
 .env.local
 .env.*.local
+
+.vercel
