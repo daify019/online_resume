@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>金融求职简历制作器</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="editor-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Finance Resume Studio</p>
+          <h1>金融求职简历制作器</h1>
+        </div>
+        <div class="top-actions">
+          <button id="uploadPhotoButton" class="ghost-button" type="button">上传照片</button>
+          <input id="photoInput" class="sr-only" accept="image/*" type="file" />
+          <button id="exportEnglish" class="primary-button" type="button">一键导出英文简历</button>
+        </div>
+      </header>
+
+      <section class="control-strip">
+        <label>
+          目标页数
+          <select id="targetPages">
+            <option value="1">1 页</option>
+            <option value="2">2 页</option>
+            <option value="auto">自动</option>
+          </select>
+        </label>
+        <label>
+          页面设计
+          <select id="themeId">
+            <option value="finance-classic">经典金融</option>
+            <option value="modern-sans">现代清爽</option>
+            <option value="editorial-serif">稳重衬线</option>
+          </select>
+        </label>
+        <span id="saveState" class="save-state">已保存 刚刚</span>
+        <button id="previewToggle" class="ghost-button" type="button">预览简历</button>
+        <div class="mobile-tabs">
+          <button id="editTab" class="active" type="button">编辑</button>
+          <button id="previewTab" type="button">预览</button>
+        </div>
+      </section>
+
+      <div id="workspace" class="workspace view-edit preview-closed">
+        <aside class="section-manager">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Sections</p>
+              <h2>模块编排</h2>
+            </div>
+            <button id="restoreOrder" class="icon-button wide" title="恢复金融推荐顺序" type="button">推荐顺序</button>
+          </div>
+          <ol id="sectionList" class="section-list"></ol>
+        </aside>
+
+        <section class="editor-panel">
+          <div class="form-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Editor</p>
+                <h2 id="activeTitle">基本信息</h2>
+              </div>
+              <span id="translationStatus" class="status-pill status-reviewed">reviewed</span>
+            </div>
+            <div id="fieldGroup" class="field-group"></div>
+          </div>
+          <div id="advisor" class="advisor"></div>
+        </section>
+
+        <aside id="previewPanel" class="preview-panel" hidden>
+          <div class="preview-toolbar">
+            <span>A4 Preview</span>
+            <strong id="pageCount" class="ok">1 页</strong>
+          </div>
+          <div id="previewPages" class="preview-pages"></div>
+        </aside>
+      </div>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

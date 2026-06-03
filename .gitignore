@@ -1,0 +1,10 @@
+.next/
+node_modules/
+
+*.log
+*.pdf
+verify-*
+
+.env
+.env.local
+.env.*.local
