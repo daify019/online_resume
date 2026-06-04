@@ -15,6 +15,7 @@ import {
   translateResumeToLanguage,
   updateTranslatedField,
 } from "@/lib/resume-core.mjs";
+import { buildResumeWordDocument, renderResumePrintHtml } from "@/lib/resume-export.mjs";
 import type { ResumeDocument, ResumeSection, TargetPages } from "@/lib/resume-types";
 import { FitAdvisor } from "./resume-fit-advisor";
 import { ResumePreview } from "./resume-preview";
@@ -141,16 +142,13 @@ export function ResumeEditorShell({ initialResume }: { initialResume: ResumeDocu
     await exportResumePdf(translateResumeToLanguage(resume, "en"));
   }
 
+  function exportWord() {
+    const word = buildResumeWordDocument(resume);
+    downloadTextFile(word.content, `${resume.title}-${resume.language}.${word.extension}`, word.mimeType);
+  }
+
   function exportData() {
-    const blob = new Blob([JSON.stringify(resume, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${resume.title || "resume"}.json`;
-    document.body.append(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
+    downloadTextFile(JSON.stringify(resume, null, 2), `${resume.title || "resume"}.json`, "application/json");
   }
 
   async function importData(event: ChangeEvent<HTMLInputElement>) {
@@ -184,6 +182,11 @@ export function ResumeEditorShell({ initialResume }: { initialResume: ResumeDocu
   }
 
   async function exportResumePdf(resumeForExport: ResumeDocument) {
+    if (window.location.hostname.endsWith(".vercel.app")) {
+      printResumePdfFallback(resumeForExport);
+      return;
+    }
+
     setExportState("working");
     try {
       const response = await fetch(`/api/resumes/${resumeForExport.id}/export/pdf`, {
@@ -192,8 +195,8 @@ export function ResumeEditorShell({ initialResume }: { initialResume: ResumeDocu
         body: JSON.stringify({ resume: resumeForExport }),
       });
       if (!response.ok) {
-        const message = await response.json().catch(() => ({ message: "PDF 导出失败" }));
-        throw new Error(message.message ?? "PDF 导出失败");
+        printResumePdfFallback(resumeForExport);
+        return;
       }
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
@@ -204,8 +207,8 @@ export function ResumeEditorShell({ initialResume }: { initialResume: ResumeDocu
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-    } catch (error) {
-      window.alert(error instanceof Error ? error.message : "PDF 导出失败");
+    } catch {
+      printResumePdfFallback(resumeForExport);
     } finally {
       setExportState("idle");
     }
@@ -224,6 +227,9 @@ export function ResumeEditorShell({ initialResume }: { initialResume: ResumeDocu
           </button>
           <button className="ghost-button" onClick={exportData}>
             导出数据
+          </button>
+          <button className="ghost-button" onClick={exportWord}>
+            导出 Word
           </button>
           <button className="ghost-button" onClick={() => fileInputRef.current?.click()}>
             导入数据
@@ -361,4 +367,36 @@ function readFileAsDataUrl(file: File) {
     reader.addEventListener("error", () => reject(reader.error));
     reader.readAsDataURL(file);
   });
+}
+
+function downloadTextFile(content: string, filename: string, type: string) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function printResumePdfFallback(resume: ResumeDocument) {
+  const iframe = document.createElement("iframe");
+  iframe.setAttribute("aria-hidden", "true");
+  iframe.style.border = "0";
+  iframe.style.height = "1px";
+  iframe.style.left = "-9999px";
+  iframe.style.position = "fixed";
+  iframe.style.top = "0";
+  iframe.style.width = "1px";
+  iframe.srcdoc = renderResumePrintHtml(resume);
+  document.body.append(iframe);
+  iframe.addEventListener("load", () => {
+    setTimeout(() => {
+      iframe.contentWindow?.focus();
+      iframe.contentWindow?.print();
+    }, 150);
+  });
+  setTimeout(() => iframe.remove(), 60000);
 }

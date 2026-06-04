@@ -20,6 +20,7 @@ import {
   translateFieldValue,
   updateTranslatedField,
 } from "../src/lib/resume-core.mjs";
+import { buildResumeWordDocument, renderResumePrintHtml } from "../src/lib/resume-export.mjs";
 
 test("creates a finance resume with the recommended section order", () => {
   const resume = createDefaultResume();
@@ -317,4 +318,19 @@ test("applies machine translation and marks edited fields as reviewed", () => {
   });
 
   assert.equal(reviewed.sections[0].content[0].translationStatus, "reviewed");
+});
+
+test("renders export HTML and Word document content from resume fields", () => {
+  const resume = createDefaultResume();
+
+  const html = renderResumePrintHtml(resume);
+  const word = buildResumeWordDocument(resume);
+
+  assert.match(html, /<!doctype html>/);
+  assert.match(html, /@page \{ size: A4/);
+  assert.match(html, /金融分析师/);
+  assert.match(word.content, /xmlns:o="urn:schemas-microsoft-com:office:office"/);
+  assert.match(word.content, /金融分析师/);
+  assert.equal(word.mimeType, "application/msword;charset=utf-8");
+  assert.equal(word.extension, "doc");
 });
