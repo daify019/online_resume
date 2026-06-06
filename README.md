@@ -4,6 +4,10 @@
 
 默认简历内容使用“张三”、`xx大学`、`xx证券研究所` 等脱敏占位信息，不包含真实学校或公司名称。
 
+## 在线使用
+
+项目已上线，可直接访问：[https://online-resume-five.vercel.app](https://online-resume-five.vercel.app)。
+
 ## 运行
 
 ```bash
