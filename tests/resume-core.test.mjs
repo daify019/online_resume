@@ -104,7 +104,7 @@ test("moves repeatable blocks inside a section", () => {
     id: "education-second",
     fields: {
       ...education.content[0].fields,
-      school: { zh: "复旦大学", en: "Fudan University" },
+      school: { zh: "xx学院", en: "XX College" },
     },
   };
   const withSecondEducation = {
@@ -233,10 +233,10 @@ test("auto page mode expands page count based on content length", () => {
 });
 
 test("translates field values instead of echoing an existing stale value", () => {
-  const translated = translateFieldValue("上海财经大学", "school", "en");
+  const translated = translateFieldValue("xx大学", "school", "en");
 
-  assert.equal(translated, "Shanghai University of Finance and Economics");
-  assert.notEqual(translated, "Translated: 上海财经大学");
+  assert.equal(translated, "XX University");
+  assert.notEqual(translated, "Translated: xx大学");
 });
 
 test("translates the whole resume to English without mutating the original language", () => {
@@ -248,7 +248,7 @@ test("translates the whole resume to English without mutating the original langu
   assert.equal(english.language, "en");
   assert.equal(
     english.sections.find((section) => section.type === "education").content[0].fields.school.en,
-    "Shanghai University of Finance and Economics",
+    "XX University",
   );
   assert.equal(
     english.sections.find((section) => section.type === "skills").content[0].fields.certifications.en,
@@ -270,8 +270,8 @@ test("exports English from the latest Chinese edits instead of stale default Eng
                 ...block.fields,
                 school: {
                   ...block.fields.school,
-                  zh: "复旦大学",
-                  en: "Shanghai University of Finance and Economics",
+                  zh: "xx学院",
+                  en: "XX University",
                 },
               },
             })),
@@ -284,7 +284,7 @@ test("exports English from the latest Chinese edits instead of stale default Eng
 
   assert.equal(
     english.sections.find((section) => section.type === "education").content[0].fields.school.en,
-    "Fudan University",
+    "XX College",
   );
 });
 

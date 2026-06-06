@@ -1,13 +1,13 @@
 const DEFAULT_SECTION_ORDER = ["profile", "selfEvaluation", "education", "experience", "projects", "skills", "awards", "languages"];
 const TRANSLATION_DICTIONARY = new Map([
-  ["林予安", "Yuan Lin"],
-  ["复旦大学", "Fudan University"],
-  ["上海财经大学", "Shanghai University of Finance and Economics"],
+  ["张三", "Zhang San"],
+  ["xx学院", "XX College"],
+  ["xx大学", "XX University"],
   ["金融硕士", "Master of Finance"],
   ["金融分析师", "Financial Analyst"],
   ["投行实习生", "Investment Banking Intern"],
   ["上海", "Shanghai"],
-  ["华东证券研究所", "Huadong Securities Research Institute"],
+  ["xx证券研究所", "XX Securities Research Institute"],
   ["行研实习生", "Equity Research Intern"],
   ["消费行业并购案例研究", "Consumer M&A Case Study"],
   ["估值", "valuation"],
@@ -53,10 +53,10 @@ let resume = createDefaultResume();
 
 function createDefaultResume() {
   const blocks = {
-    profile: [{ id: "profile-main", fields: { name: { zh: "林予安", en: "Yuan Lin" }, targetRole: { zh: "金融分析师 / 投行实习生", en: "Financial Analyst / Investment Banking Intern" }, phone: { zh: "138-0000-0000", en: "+86 138-0000-0000" }, email: { zh: "yuan.lin@example.com", en: "yuan.lin@example.com" }, city: { zh: "上海", en: "Shanghai" } }, translationStatus: "reviewed" }],
+    profile: [{ id: "profile-main", fields: { name: { zh: "张三", en: "Zhang San" }, targetRole: { zh: "金融分析师 / 投行实习生", en: "Financial Analyst / Investment Banking Intern" }, phone: { zh: "138-0000-0000", en: "+86 138-0000-0000" }, email: { zh: "zhangsan@example.com", en: "zhangsan@example.com" }, city: { zh: "上海", en: "Shanghai" } }, translationStatus: "reviewed" }],
     selfEvaluation: [{ id: "self-evaluation-main", fields: { evaluation: { zh: "金融硕士候选人，具备估值、财务建模、行业研究和尽职调查经验，关注消费、TMT 与新能源方向。", en: "Finance master's candidate with experience in valuation, financial modeling, industry research, and due diligence." }, strengths: { zh: "擅长把公开资料、财务数据和行业逻辑整理成可执行结论，能独立完成模型搭建与报告底稿。", en: "Able to translate public information, financial data, and sector logic into actionable conclusions; independently builds models and research drafts." } }, translationStatus: "reviewed" }],
-    education: [{ id: "education-main", fields: { school: { zh: "上海财经大学", en: "Shanghai University of Finance and Economics" }, degree: { zh: "金融硕士", en: "Master of Finance" }, detail: { zh: "GPA 3.8/4.0，核心课程：公司金融、投资学、财务报表分析。", en: "GPA 3.8/4.0. Coursework: Corporate Finance, Investments, Financial Statement Analysis." } }, translationStatus: "reviewed" }],
-    experience: [{ id: "experience-main", fields: { company: { zh: "华东证券研究所", en: "Huadong Securities Research Institute" }, role: { zh: "行研实习生", en: "Equity Research Intern" }, bullets: { zh: "参与 12 家上市公司财务拆解，搭建三表模型并输出估值敏感性分析；整理 Wind 与公告数据，支持新能源板块周报。", en: "Analyzed 12 listed companies, built three-statement models, and prepared valuation sensitivity analysis; compiled Wind and filing data for weekly new-energy sector reports." } }, translationStatus: "reviewed" }],
+    education: [{ id: "education-main", fields: { school: { zh: "xx大学", en: "XX University" }, degree: { zh: "金融硕士", en: "Master of Finance" }, detail: { zh: "GPA 3.8/4.0，核心课程：公司金融、投资学、财务报表分析。", en: "GPA 3.8/4.0. Coursework: Corporate Finance, Investments, Financial Statement Analysis." } }, translationStatus: "reviewed" }],
+    experience: [{ id: "experience-main", fields: { company: { zh: "xx证券研究所", en: "XX Securities Research Institute" }, role: { zh: "行研实习生", en: "Equity Research Intern" }, bullets: { zh: "参与 12 家上市公司财务拆解，搭建三表模型并输出估值敏感性分析；整理 Wind 与公告数据，支持新能源板块周报。", en: "Analyzed 12 listed companies, built three-statement models, and prepared valuation sensitivity analysis; compiled Wind and filing data for weekly new-energy sector reports." } }, translationStatus: "reviewed" }],
     projects: [{ id: "projects-main", fields: { title: { zh: "消费行业并购案例研究", en: "Consumer M&A Case Study" }, bullets: { zh: "基于 DCF、可比公司和可比交易法评估标的价值，测算 30 亿元交易规模下的协同效应。", en: "Valued the target with DCF, trading comps, and transaction comps; estimated synergies under a RMB 3bn deal scenario." } }, translationStatus: "reviewed" }],
     skills: [{ id: "skills-main", fields: { skills: { zh: "Wind、Bloomberg、Excel VBA、Python、SQL、财务建模、估值分析", en: "Wind, Bloomberg, Excel VBA, Python, SQL, financial modeling, valuation" }, certifications: { zh: "CFA Level I Candidate、证券从业资格", en: "CFA Level I Candidate, Securities Qualification Certificate" } }, translationStatus: "reviewed" }],
     awards: [{ id: "awards-main", fields: { awards: { zh: "校级一等奖学金、全国大学生金融建模竞赛二等奖", en: "First-class University Scholarship, National Financial Modeling Competition Second Prize" } }, translationStatus: "reviewed" }],

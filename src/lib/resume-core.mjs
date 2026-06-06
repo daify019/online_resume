@@ -81,17 +81,17 @@ export const FIELD_META = {
 };
 
 const TRANSLATION_DICTIONARY = new Map([
-  ["林予安", "Yuan Lin"],
+  ["张三", "Zhang San"],
   ["张金融", "Zhang Jinrong"],
   ["金融分析师", "Financial Analyst"],
   ["投行实习生", "Investment Banking Intern"],
-  ["上海财经大学", "Shanghai University of Finance and Economics"],
-  ["复旦大学", "Fudan University"],
+  ["xx大学", "XX University"],
+  ["xx学院", "XX College"],
   ["金融硕士", "Master of Finance"],
   ["金融学", "Finance"],
   ["上海", "Shanghai"],
   ["北京", "Beijing"],
-  ["华东证券研究所", "Huadong Securities Research Institute"],
+  ["xx证券研究所", "XX Securities Research Institute"],
   ["行研实习生", "Equity Research Intern"],
   ["研究部", "Research Department"],
   ["新能源研究组", "New Energy Research Team"],
@@ -117,10 +117,10 @@ const REVERSE_TRANSLATION_DICTIONARY = new Map(
 const DEFAULT_BLOCKS = {
   profile: [
     block("profile-main", {
-      name: ["林予安", "Yuan Lin"],
+      name: ["张三", "Zhang San"],
       targetRole: ["金融分析师 / 投行实习生", "Financial Analyst / Investment Banking Intern"],
       phone: ["138-0000-0000", "+86 138-0000-0000"],
-      email: ["yuan.lin@example.com", "yuan.lin@example.com"],
+      email: ["zhangsan@example.com", "zhangsan@example.com"],
       city: ["上海", "Shanghai"],
     }),
   ],
@@ -138,7 +138,7 @@ const DEFAULT_BLOCKS = {
   ],
   education: [
     block("education-main", {
-      school: ["上海财经大学", "Shanghai University of Finance and Economics"],
+      school: ["xx大学", "XX University"],
       degree: ["金融硕士", "Master of Finance"],
       major: ["金融学", "Finance"],
       startDate: ["2024.09", "Sep 2024"],
@@ -151,7 +151,7 @@ const DEFAULT_BLOCKS = {
   ],
   experience: [
     block("experience-main", {
-      company: ["华东证券研究所", "Huadong Securities Research Institute"],
+      company: ["xx证券研究所", "XX Securities Research Institute"],
       startDate: ["2025.06", "Jun 2025"],
       endDate: ["2025.09", "Sep 2025"],
       position: ["行研实习生", "Equity Research Intern"],
